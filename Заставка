@@ -1,0 +1,73 @@
+from pygame import *
+
+init()
+
+size = (500, 500)
+
+screen = display.set_mode(size)
+
+screen.blit(a9512396-c71f48ee97ce55fd240bee07.jfif, (500,500))
+
+ARIAL_50 = font.SysFont('arial', 50)
+
+class Menu:
+    def __init__(self):
+        self._option_surfaces = []
+        self._callbacks = []
+        self._current_option_index = 0
+
+        def append_option(self, option, callback):
+            self._option_surfaces.append(ARIAL_50.render(option, True, (255, 255, 255)))
+            self._callbacks.append(callback)
+
+            # 0 5 -> 6
+            # 5
+            # 5
+            # 0 5 -> -1
+            # -1
+            # 0
+
+        def switch(self, director):
+            self._current_option_index = max(0, min(self._current_option_index + director, len(self._option_surfaces) -1))
+
+        def select(self, direction):
+            self._callbacks[self._current_option_index] ()
+
+        def draw(self, surf, x, y, option_y_padding):
+            for i, option in enumerate(self._option_surfaces):
+                option_rect = option.get_rect()
+                option_rect.topleft = (x, y + i * option_y_padding)
+                if i == self._current_option_index:
+                    draw.rect(surf, (0, 100, 0), option_rect)
+                surf.blit(option, option_rect)
+
+menu = Menu()
+menu.append_option('Play Game', start_game) 
+menu.append_option('Authors', show_author) 
+menu.append_option('Quit', quit) 
+ 
+running = True 
+ 
+while running: 
+    for e in pygame.event.get(): 
+        if e.type == pygame.QUIT: 
+            running = False 
+ 
+        elif e.type == pygame.KEYDOWN: 
+            if e.key == pygame.K_w: 
+                menu.switch(-1) 
+            elif e.key == pygame.K_s: 
+                menu.switch(1) 
+            elif e.key == pygame.K_SPACE: 
+                menu.select() 
+ 
+    background2 = transform.scale(image.load("scooby menu1.jpg"), (700, 500)) 
+    window.blit(background2, (0, 0)) 
+ 
+    # screen.fill((0, 0, 0)) 
+ 
+    menu.draw(screen, 50, 150, 75) 
+ 
+    pygame.display.flip() 
+ 
+pygame.quit()
