@@ -1,3 +1,4 @@
+це не те я наплутав
 from pygame import * 
  
 init() 
