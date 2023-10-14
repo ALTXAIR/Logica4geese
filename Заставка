@@ -1,6 +1,7 @@
+import pygame 
 from pygame import * 
  
-init() 
+pygame.init() 
  
 size = (500, 500) 
  
@@ -17,7 +18,7 @@ class Menu:
         self._current_option_index = 0 
  
         def append_option(self, option, callback): 
-            self._option_surfaces.append(ARIAL_50.render(option, True, (255, 255, 255))) 
+            self._option_surfaces.append(ARIAL_50.render(option, True, (0, 0, 0))) 
             self._callbacks.append(callback) 
  
         def switch(self, director): 
